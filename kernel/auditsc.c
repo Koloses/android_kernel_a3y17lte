@@ -1895,7 +1895,7 @@ out_alloc:
 			goto out;
 
 		if (len <= (PATH_MAX - sizeof(*new))) {
-			new->name = (char *)(new)  sizeof(*new);
+			new->name = (char *)(new) + sizeof(*new);
 			new->separate = false;
 		} else if (len <= PATH_MAX) {
 			/* this looks odd, but is due to final_putname() */
