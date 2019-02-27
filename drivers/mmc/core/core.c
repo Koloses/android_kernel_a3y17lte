@@ -312,9 +312,9 @@ EXPORT_SYMBOL(mmc_start_bkops);
 static void mmc_wait_data_done(struct mmc_request *mrq)
 {
 	unsigned long flags;
+	struct mmc_context_info *context_info = &mrq->host->context_info;
 
 	spin_lock_irqsave(&mrq->host->context_info.lock, flags);
-	struct mmc_context_info *context_info = &mrq->host->context_info;
 	context_info->is_done_rcv = true;
 	wake_up_interruptible(&context_info->wait);
 	spin_unlock_irqrestore(&mrq->host->context_info.lock, flags);
